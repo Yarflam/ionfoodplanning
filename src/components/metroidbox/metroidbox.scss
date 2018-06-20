@@ -1,0 +1,41 @@
+@import '../../theme/variables.scss';
+
+metroid-box {
+    @include border-radius-mixin(5px);
+    position: relative;
+    display: inline-block;
+    width: 100%;
+    box-sizing: border-box;
+    overflow: hidden;
+    padding: 50% 0;
+
+    .label, .icon {
+        position: absolute;
+        color: #FFF;
+    }
+
+    .label {
+        bottom: 0; left: 0; right: 0;
+        background-color: rgba(0,0,0,0.5);
+        text-align: center;
+        font-size: 14px;
+        padding: 5px 10px;
+        z-index: 2;
+    }
+
+    .icon {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        top: 0; left: 0; right: 0; bottom: 0;
+        text-align: center;
+        font-size: 50px;
+        padding-bottom: 15px;
+    }
+}
+
+@each $prop, $color in $colors {
+    .theme-#{$prop} .icon {
+        background-color: $color;
+    }
+}

@@ -1,21 +1,17 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 
-/**
- * Generated class for the MetroidComponent component.
- *
- * See https://angular.io/api/core/Component for more info on Angular
- * Components.
- */
 @Component({
 	selector: 'metroid',
 	templateUrl: 'metroid.html'
 })
-export class MetroidComponent {
+export class MetroidComponent implements OnInit {
 
-	@Input() listItems: Array<any>;
+	@Input() props: Array<{ name: string; path: string; icon: string; color: string; }>;
 
-	constructor() {
-		console.log(this.listItems);
+	listItems: Array<{ name: string; path: string; icon: string; color: string; }>;
+
+	ngOnInit() {
+		this.listItems = this.props;
 	}
 
 }

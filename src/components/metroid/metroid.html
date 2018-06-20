@@ -2,8 +2,8 @@
 <div>
     <ion-grid>
         <ion-row>
-            <ion-col *ngFor="let item of listItems" col-6 col-sm-3 col-md-2 col-lg-1>
-                <div>test</div>
+            <ion-col *ngFor="let item of listItems" col-6 col-sm-3 col-md-2 col-lg-2>
+                <metroid-box [props]="item"></metroid-box>
             </ion-col>
         </ion-row>
     </ion-grid>

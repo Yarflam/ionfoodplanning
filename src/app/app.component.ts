@@ -4,37 +4,45 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 
 @Component({
-  templateUrl: 'app.html'
+	templateUrl: 'app.html'
 })
 export class MyApp {
-  @ViewChild(Nav) nav: Nav;
+	@ViewChild(Nav) nav: Nav;
 
-  rootPage: any = 'page-home';
+	rootPage: any = 'page-home';
 
-  pages: Array<{title: string, component: any}>;
+	routes: Array<{ path: string, component: any }>;
+	pages: Array<{ title: string, component: any }>;
 
-  constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen) {
-    this.initializeApp();
+	constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen) {
+		this.initializeApp();
 
-    // used for an example of ngFor and navigation
-    this.pages = [
-      { title: 'Dashboard', component: 'page-home' }
-    ];
+		/* Routes */
+		this.routes = [
+			{ path: '.', component: 'page-home' },
+			{ path: 'accueil', component: 'page-home' },
+			{ path: 'frigo', component: 'page-frigo' },
+		];
 
-  }
+		/* Navigation */
+		this.pages = [
+			{ title: 'Tableau de bord', component: 'page-home' },
+			{ title: 'Agenda', component: 'page-agenda' },
+			{ title: 'Frigo', component: 'page-frigo' },
+			{ title: 'Recettes', component: 'page-recettes' },
+			{ title: 'Liste des courses', component: 'page-liste-courses' }
+		];
 
-  initializeApp() {
-    this.platform.ready().then(() => {
-      // Okay, so the platform is ready and our plugins are available.
-      // Here you can do any higher level native things you might need.
-      this.statusBar.styleDefault();
-      this.splashScreen.hide();
-    });
-  }
+	}
 
-  openPage(page) {
-    // Reset the content nav to have just this page
-    // we wouldn't want the back button to show in this scenario
-    this.nav.setRoot(page.component);
-  }
+	initializeApp() {
+		this.platform.ready().then(() => {
+			this.statusBar.styleDefault();
+			this.splashScreen.hide();
+		});
+	}
+
+	openPage(page) {
+		this.nav.setRoot(page.component);
+	}
 }

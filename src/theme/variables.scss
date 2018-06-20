@@ -14,6 +14,25 @@ $app-direction: ltr;
 
 @import "ionic.globals";
 
+// Compatible navigator
+@mixin border-radius-mixin ($props) {
+    -webkit-border-radius: $props;
+    -moz-border-radius: $props;
+    -o-border-radius: $props;
+    border-radius: $props;
+}
+
+@mixin box-shadow-mixin ($props) {
+    -webkit-box-shadow: $props;
+    -moz-box-shadow: $props;
+    -o-box-shadow: $props;
+    box-shadow: $props;
+}
+
+@mixin transition-mixin ($props) {
+    -webkit-transition: $props;
+    transition: $props;
+}
 
 // Shared Variables
 // --------------------------------------------------
