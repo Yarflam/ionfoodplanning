@@ -14,6 +14,13 @@ $app-direction: ltr;
 
 @import "ionic.globals";
 
+// page
+.default-page {
+    .scroll-content {
+        margin-top: 50px;
+    }
+}
+
 // Compatible navigator
 @mixin border-radius-mixin ($props) {
     -webkit-border-radius: $props;

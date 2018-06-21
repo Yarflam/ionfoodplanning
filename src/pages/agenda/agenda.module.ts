@@ -1,17 +1,17 @@
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { IonicPageModule } from 'ionic-angular';
 import { MenuComponentModule } from '../../components/menu/menu.module';
-import { FrigoPage } from './frigo';
+import { AgendaPage } from './agenda';
 
 @NgModule({
 	declarations: [
-		FrigoPage
+		AgendaPage
 	],
 	entryComponents: [],
 	imports: [
 		MenuComponentModule,
-		IonicPageModule.forChild(FrigoPage)
+		IonicPageModule.forChild(AgendaPage)
 	],
 	schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
-export class FrigoPageModule { }
+export class AgendaPageModule { }

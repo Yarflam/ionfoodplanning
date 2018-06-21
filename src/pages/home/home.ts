@@ -4,7 +4,7 @@ import { IonicPage } from "ionic-angular";
 /* Leazy Loading */
 @IonicPage({
 	name: "page-home",
-	segment: "." // root
+	segment: "tableau-bord" // root
 })
 @Component({
 	selector: "page-home",
@@ -12,15 +12,15 @@ import { IonicPage } from "ionic-angular";
 })
 export class HomePage {
 
-	listMetroid: Array<{ name: string; path: string; icon: string; color: string; }> = new Array();
+	listMetroid: Array<any> = new Array();
 
 	constructor() {
 		/* La liste des éléments sur le dashboard */
 		this.listMetroid = [
-			{ 'name': 'Agenda', 'icon': 'calendar', 'color': 'primary' },
-			{ 'name': 'Frigo', 'icon': 'pricetags', 'color': 'secondary' },
-			{ 'name': 'Recettes', 'icon': 'book', 'color': 'danger' },
-			{ 'name': 'Liste des courses', 'icon': 'list-box', 'color': 'dark' },
+			{ 'name': 'Agenda', 'target': 'page-agenda', 'icon': 'calendar', 'color': 'primary' },
+			{ 'name': 'Frigo', 'target': 'page-frigo', 'icon': 'pricetags', 'color': 'secondary' },
+			{ 'name': 'Recettes', 'target': 'page-recettes', 'icon': 'book', 'color': 'danger' },
+			{ 'name': 'Liste des courses', 'target': 'page-liste-courses', 'icon': 'list-box', 'color': 'dark' },
 		];
 	}
 }

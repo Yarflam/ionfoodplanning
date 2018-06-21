@@ -1,39 +1,56 @@
-import { Injectable, OnInit } from '@angular/core';
-import { Ingredient } from '../../models/ingredient';
+import { Injectable } from '@angular/core';
+import { Ingredient } from '../../models/Ingredient';
 import { ApiWebService } from '../apiweb/apiweb.service';
 
 @Injectable()
 export class IngredientsService {
 	/* tslint:disable */
+	private SyncPromises: Array<any> = [];
 	public IngredientsDispo: Ingredient[] = [];
 	public IngredientsToBuy: Ingredient[] = [];
 	public Id: number;
 
 	constructor(public api: ApiWebService) {
 		this.Id = 1;
-		this.GetAllIngredientsBDD();
+		this.Sync();
 	}
 
-	GetAllIngredientsBDD() {
-		this.IngredientsDispo = [];
+	Sync() {
+		let promise = { ing: (data) => { }, ingBuy: (data) => { } };
 
-		this.api.GetAllIngredients().subscribe(
-			(data: Response) => {
-				for (const key in data) {
-					const item = data[key];
-					if (item != null)
-					// tslint:disable-next-line:one-line
-					{
-						const ingredient = this.SetAll(item);
-						this.IngredientsDispo.push(ingredient);
+		this.IngredientsDispo = [];
+		this.IngredientsToBuy = [];
+
+		/* First call */
+		if (!this.SyncPromises.length) {
+
+			this.api.GetAllIngredients().subscribe(
+				(data: Response) => {
+					data = window['yengin'].jsonParse(data['_body']);
+					for (const key in data) {
+						const item = data[key];
+						if (item != null)
+						// tslint:disable-next-line:one-line
+						{
+							const ingredient = this.SetAll(item);
+							this.IngredientsDispo.push(ingredient);
+						}
+					}
+					/* Dispatch */
+					for (let i = 0; i < this.SyncPromises.length; i++) {
+						this.SyncPromises[i].ing(this.IngredientsDispo);
+						delete this.SyncPromises[i]['ing'];
+						/* Autoremove */
+						if (this.SyncPromises[i]['ingBuy'] === undefined) {
+							this.SyncPromises.splice(i, 1); i--;
+						}
 					}
 				}
-			}
-		);
+			);
 
-		this.api.GetAllIngredientsToBuy().subscribe(
-			(data: Ingredient[]) => {
-				if (data !== null) {
+			this.api.GetAllIngredientsToBuy().subscribe(
+				(data: Ingredient[]) => {
+					data = window['yengin'].jsonParse(data['_body']);
 					for (const key in data) {
 						const item = data[key];
 						if (item != null)
@@ -43,10 +60,22 @@ export class IngredientsService {
 							this.IngredientsToBuy.push(ingredient);
 						}
 					}
+					/* Dispatch */
+					for (let i = 0; i < this.SyncPromises.length; i++) {
+						this.SyncPromises[i].ingBuy(this.IngredientsDispo);
+						delete this.SyncPromises[i]['ingBuy'];
+						/* Autoremove */
+						if (this.SyncPromises[i]['ing'] === undefined) {
+							this.SyncPromises.splice(i, 1); i--;
+						}
+					}
 				}
-			}
+			);
 
-		);
+		}
+
+		this.SyncPromises.push(promise);
+		return promise;
 	}
 
 
@@ -111,8 +140,12 @@ export class IngredientsService {
 		this.api.ModifyIngredient(updateItem).subscribe();
 	}
 
-	GetAll() {
-		return this.IngredientsDispo;
+	GetAll(callback) {
+		if (this.IngredientsDispo.length) {
+			callback(this.IngredientsDispo);
+		} else {
+			this.Sync()['ing'] = callback;
+		}
 	}
 
 	GetIngredientById(id: number) {

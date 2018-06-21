@@ -1,15 +1,8 @@
 import { NgModule } from '@angular/core';
-import { MetroidComponent } from './metroid/metroid';
-import { MetroidBoxComponent } from './metroidbox/metroidbox';
+
 @NgModule({
-	declarations: [
-		MetroidComponent,
-		MetroidBoxComponent
-	],
+	declarations: [],
 	imports: [],
-	exports: [
-		MetroidComponent,
-		MetroidBoxComponent
-	]
+	exports: []
 })
 export class ComponentsModule { }

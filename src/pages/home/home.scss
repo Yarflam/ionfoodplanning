@@ -1,6 +1,8 @@
 @import '../../theme/variables.scss';
 
 page-home {
+    @extend .default-page;
+
     h3 {
         padding: 10px 15px 0 15px;
     }

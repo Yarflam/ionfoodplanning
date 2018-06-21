@@ -1,13 +1,18 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { ErrorHandler, NgModule } from '@angular/core';
 import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
-import { LocationStrategy, PathLocationStrategy } from '@angular/common';
+import { LocationStrategy, HashLocationStrategy } from '@angular/common';
+import { HttpModule } from '@angular/http';
 
-/* Route - Entry point */
+/* Application - Entry point */
 import { MyApp } from './app.component';
 
-/* Modules */
-import { MenuComponent } from '../components/menu/menu';
+/* Services */
+import { RecettesService } from '../components/services/recettes/recettes.service';
+import { IngredientsService } from '../components/services/ingredients/ingredients.service';
+import { ApiWebService } from '../components/services/apiweb/apiweb.service';
+import { ImgWebService } from '../components/services/imgweb/imgweb.service';
+import { SemainesService } from '../components/services/semaines/semaines.service';
 
 /* Ionic Components */
 import { StatusBar } from '@ionic-native/status-bar';
@@ -15,22 +20,25 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 
 @NgModule({
 	declarations: [
-		MyApp,
-		MenuComponent
+		MyApp
 	],
 	imports: [
 		BrowserModule,
-		IonicModule.forRoot(MyApp),
+		HttpModule,
+		IonicModule.forRoot(MyApp)
 	],
 	bootstrap: [IonicApp],
-	entryComponents: [
-		MyApp
-	],
+	entryComponents: [],
 	providers: [
+		RecettesService,
+		IngredientsService,
+		ApiWebService,
+		ImgWebService,
+		SemainesService,
 		StatusBar,
 		SplashScreen,
 		{ provide: ErrorHandler, useClass: IonicErrorHandler },
-		{ provide: LocationStrategy, useClass: PathLocationStrategy }
+		{ provide: LocationStrategy, useClass: HashLocationStrategy }
 	]
 })
 export class AppModule { }

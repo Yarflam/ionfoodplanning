@@ -6,9 +6,9 @@ import { Component, Input, OnInit } from '@angular/core';
 })
 export class MetroidComponent implements OnInit {
 
-	@Input() props: Array<{ name: string; path: string; icon: string; color: string; }>;
+	@Input() props: Array<any>;
 
-	listItems: Array<{ name: string; path: string; icon: string; color: string; }>;
+	listItems: Array<any>;
 
 	ngOnInit() {
 		this.listItems = this.props;

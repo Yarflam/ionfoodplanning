@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
-import { Recette } from '../../Models/Recette';
-import { IRecettes } from '../../Interfaces/irecettes';
+import { Recette } from '../../models/Recette';
+import { IRecettes } from '../../interfaces/irecettes';
 import { ApiWebService } from "../apiweb/apiweb.service";
-import { IngredientsService } from '../Ingredients/ingredients.service';
+import { IngredientsService } from '../ingredients/ingredients.service';
 
 @Injectable()
 export class RecettesService implements IRecettes {

@@ -1,9 +1,8 @@
 import { Injectable } from '@angular/core';
-import { ISemaines } from '../../Interfaces/isemaines';
+import { ISemaines } from '../../interfaces/isemaines';
 import { ApiWebService } from '../apiweb/apiweb.service';
-import { Semaine } from '../../Models/Semaine';
-import { RecettesService } from '../Recettes/recettes.service';
-import { Recette } from '../../Models/Recette';
+import { Semaine } from '../../models/Semaine';
+import { RecettesService } from '../recettes/recettes.service';
 
 @Injectable()
 export class SemainesService implements ISemaines {

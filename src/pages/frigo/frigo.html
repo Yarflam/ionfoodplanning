@@ -1,1 +1,9 @@
 <menu></menu>
+<ion-content>
+    <h3>Frigo</h3>
+    <ion-item-group>
+        <ion-item *ngFor="let item of ingredients">
+            {{item.Name}}
+        </ion-item>
+    </ion-item-group>
+</ion-content>

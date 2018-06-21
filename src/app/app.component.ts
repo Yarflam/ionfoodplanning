@@ -22,6 +22,8 @@ export class MyApp {
 			{ path: '.', component: 'page-home' },
 			{ path: 'accueil', component: 'page-home' },
 			{ path: 'frigo', component: 'page-frigo' },
+			{ path: 'recettes', component: 'page-recettes' },
+			{ path: 'list-courses', component: 'page-list-courses' },
 		];
 
 		/* Navigation */
